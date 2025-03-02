@@ -1,10 +1,10 @@
 package com.example.inventario;
 
+import android.content.Intent;
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity; // ✅ Import necesario
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import android.util.Log;
 import java.util.List;
 
 public class ListaProductosActivity extends AppCompatActivity {
@@ -22,12 +22,21 @@ public class ListaProductosActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         db = new DatabaseHelper(this);
+        cargarProductos();
+    }
+
+    public void cargarProductos() {
         List<Producto> productos = db.obtenerProductos();
-
-        // 💥 Log para saber si está vacía la lista
-        Log.d("ListaProductos", "Productos encontrados: " + productos.size());
-
         adapter = new ProductoAdapter(productos, this);
         recyclerView.setAdapter(adapter);
+    }
+
+    // Lo importante: al volver de EditarProductoActivity, recargamos la lista
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && resultCode == RESULT_OK) {
+            cargarProductos();
+        }
     }
 }

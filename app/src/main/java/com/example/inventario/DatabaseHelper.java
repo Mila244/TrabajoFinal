@@ -67,4 +67,40 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cursor.close();
         return lista;
     }
+
+    public Producto obtenerProductoPorCodigo(String codigo) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM productos WHERE codigo=?", new String[]{codigo});
+
+        if (cursor.moveToFirst()) {
+            Producto producto = new Producto(
+                    cursor.getString(0),
+                    cursor.getString(1),
+                    cursor.getInt(2),
+                    cursor.getString(3),
+                    cursor.getString(4)
+            );
+            cursor.close();
+            return producto;
+        } else {
+            cursor.close();
+            return null;
+        }
+    }
+    public void eliminarProducto(String codigo) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete("productos", "codigo=?", new String[]{codigo});
+    }
+
+    public boolean actualizarProducto(Producto producto) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues valores = new ContentValues();
+        valores.put("nombre", producto.getNombre());
+        valores.put("cantidad", producto.getCantidad());
+        valores.put("fecha", producto.getFecha());
+        valores.put("observaciones", producto.getObservaciones());
+
+        int filasAfectadas = db.update("productos", valores, "codigo=?", new String[]{producto.getCodigo()});
+        return filasAfectadas > 0;
+    }
 }

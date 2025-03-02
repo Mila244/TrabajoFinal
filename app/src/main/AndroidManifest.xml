@@ -23,6 +23,7 @@
         </activity>
         <activity android:name=".RegistrarProductoActivity"/>
         <activity android:name=".ListaProductosActivity"/>
+        <activity android:name=".EditarProductoActivity" />
         <activity android:name=".ExcelExporter"/>
     </application>
 
