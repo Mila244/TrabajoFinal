@@ -5,69 +5,98 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="16dp"
-    android:background="#F0F4FF">
+    android:background="#FFF3E0">
 
+    <!-- Título divertido -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Editar Producto"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="#FF5722"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Código (deshabilitado) -->
     <EditText
         android:id="@+id/edtCodigo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Código"
+        android:hint="🔒 Código"
         android:enabled="false"
         android:padding="12dp"
-        android:backgroundTint="#BDBDBD"
-        android:textColor="#000000"
+        android:textColor="#616161"
         android:textStyle="bold"
-        android:layout_marginBottom="8dp"/>
+        android:layout_marginBottom="8dp"
+        android:background="@android:drawable/editbox_background"
+        android:backgroundTint="#BDBDBD"/>
 
+    <!-- Nombre -->
     <EditText
         android:id="@+id/edtNombre"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Nombre"
+        android:hint="✏️ Nombre"
         android:padding="12dp"
-        android:backgroundTint="#00796B"
         android:textColor="#000000"
-        android:layout_marginBottom="8dp"/>
+        android:textStyle="bold"
+        android:layout_marginBottom="8dp"
+        android:background="@android:drawable/editbox_background"
+        android:backgroundTint="#64B5F6"/>
 
+    <!-- Cantidad -->
     <EditText
         android:id="@+id/edtCantidad"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Cantidad"
+        android:hint="📦 Cantidad"
         android:inputType="number"
         android:padding="12dp"
-        android:backgroundTint="#00796B"
         android:textColor="#000000"
-        android:layout_marginBottom="8dp"/>
+        android:textStyle="bold"
+        android:layout_marginBottom="8dp"
+        android:background="@android:drawable/editbox_background"
+        android:backgroundTint="#81C784"/>
 
+    <!-- Fecha -->
     <EditText
         android:id="@+id/edtFecha"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Fecha"
+        android:hint="📅 Fecha"
         android:padding="12dp"
-        android:backgroundTint="#00796B"
         android:textColor="#000000"
-        android:layout_marginBottom="8dp"/>
+        android:textStyle="bold"
+        android:layout_marginBottom="8dp"
+        android:background="@android:drawable/editbox_background"
+        android:backgroundTint="#FFD54F"/>
 
+    <!-- Observaciones -->
     <EditText
         android:id="@+id/edtObservaciones"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Observaciones"
+        android:hint="💬 Observaciones"
         android:padding="12dp"
-        android:backgroundTint="#00796B"
         android:textColor="#000000"
-        android:layout_marginBottom="8dp"/>
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp"
+        android:background="@android:drawable/editbox_background"
+        android:backgroundTint="#BA68C8"/>
 
+    <!-- Botón Actualizar colorido -->
     <Button
         android:id="@+id/btnActualizar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="✅ Actualizar"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="#4CAF50"
+        android:text="🚀 Actualizar Producto"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="#FF7043"
         android:textColor="#FFFFFF"
+        android:textStyle="bold"
         android:padding="12dp"
-        android:textStyle="bold"/>
+        android:textAllCaps="false"
+        android:elevation="6dp"/>
+
 </LinearLayout>

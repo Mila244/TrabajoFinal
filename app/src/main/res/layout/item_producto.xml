@@ -4,57 +4,74 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="10dp"
-    android:background="#FFFFFF"
-    android:elevation="6dp"
-    android:layout_margin="8dp"
-    android:radius="12dp">
+    android:padding="16dp"
+    android:background="#FFFDE7"
+    android:elevation="8dp"
+    android:layout_margin="12dp"
+    android:layout_marginBottom="16dp"
+    android:backgroundTintMode="multiply"
+    android:clipToOutline="true"
+    android:outlineProvider="bounds">
 
+    <!-- Título Encabezado -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="🌟 Producto Registrado 🌟"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="#FF5722"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="12dp"/>
+
+    <!-- Imagen del Producto con fondo colorido -->
     <ImageView
         android:id="@+id/imgProducto"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
         android:scaleType="centerCrop"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="12dp"
-        android:background="#EEEEEE"
-        android:padding="4dp"
-        android:elevation="4dp"/>
+        android:layout_marginBottom="16dp"
+        android:background="#FFCDD2"
+        android:padding="6dp"
+        android:elevation="6dp"
+        android:clipToOutline="true"/>
 
-    <!-- Código con estilo moderno -->
+    <!-- Información (Código, Nombre, Cantidad) con fondos divertidos -->
     <TextView
         android:id="@+id/txtCodigo"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Código:"
-        android:textSize="18sp"
-        android:textColor="#6200EE"
-        android:textStyle="bold"
-        android:layout_marginBottom="4dp" />
+        android:text="🔑 Código: 123456"
+        android:textSize="16sp"
+        android:textColor="#3F51B5"
+        android:background="#E3F2FD"
+        android:padding="8dp"
+        android:layout_marginBottom="6dp"/>
 
-    <!-- Nombre con estilo moderno -->
     <TextView
         android:id="@+id/txtNombre"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Nombre:"
-        android:textSize="18sp"
-        android:textColor="#6200EE"
-        android:textStyle="bold"
-        android:layout_marginBottom="4dp" />
+        android:text="🏷️ Nombre: Producto Ejemplo"
+        android:textSize="16sp"
+        android:textColor="#00796B"
+        android:background="#E0F2F1"
+        android:padding="8dp"
+        android:layout_marginBottom="6dp"/>
 
-    <!-- Cantidad con estilo moderno -->
     <TextView
         android:id="@+id/txtCantidad"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Cantidad:"
-        android:textSize="18sp"
-        android:textColor="#6200EE"
-        android:textStyle="bold"
-        android:layout_marginBottom="12dp" />
+        android:text="📦 Cantidad: 10 unidades"
+        android:textSize="16sp"
+        android:textColor="#E65100"
+        android:background="#FFF3E0"
+        android:padding="8dp"
+        android:layout_marginBottom="12dp"/>
 
-    <!-- Botones estilizados con colores y bordes redondeados -->
+    <!-- Botones estilo pill con colores vivos -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -65,26 +82,34 @@
             android:id="@+id/btnEditar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Editar"
+            android:text="✏️ Editar"
             android:textColor="#FFFFFF"
             android:background="#4CAF50"
-            android:layout_marginEnd="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:paddingHorizontal="16dp"
-            android:paddingVertical="6dp"/>
+            android:paddingHorizontal="24dp"
+            android:paddingVertical="10dp"
+            android:elevation="4dp"
+            android:layout_weight="1"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginEnd="8dp"/>
 
         <Button
             android:id="@+id/btnEliminar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Eliminar"
+            android:text="🗑️ Eliminar"
             android:textColor="#FFFFFF"
-            android:background="#F44336"
+            android:background="#e60000"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:paddingHorizontal="16dp"
-            android:paddingVertical="6dp"/>
+            android:paddingHorizontal="24dp"
+            android:paddingVertical="10dp"
+            android:elevation="4dp"
+            android:layout_weight="1"
+            android:textStyle="bold"
+            android:gravity="center"/>
     </LinearLayout>
 
 </LinearLayout>
