@@ -11,34 +11,68 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Registrar Producto"
-        android:textSize="22sp"
         android:textColor="#6200EE"
+        android:textSize="22sp"
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <ImageView
+        android:id="@+id/imgProducto"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="16dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_launcher_background"
+        app:layout_constraintTop_toBottomOf="@id/txtTitulo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/imgProducto"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <Button
+            android:id="@+id/btnTomarFoto"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Tomar Foto"/>
+
+        <Button
+            android:id="@+id/btnSubirFoto"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Subir Foto"/>
+    </LinearLayout>
 
     <EditText
         android:id="@+id/edtCodigo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="Código"
-        android:inputType="text"
-        app:layout_constraintTop_toBottomOf="@id/txtTitulo"
+        app:layout_constraintTop_toBottomOf="@id/linearLayout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="16dp"/>
 
     <EditText
         android:id="@+id/edtNombre"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="Nombre"
-        android:inputType="text"
         app:layout_constraintTop_toBottomOf="@id/edtCodigo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="8dp" />
+        android:layout_marginTop="8dp"/>
 
     <EditText
         android:id="@+id/edtCantidad"
@@ -49,29 +83,27 @@
         app:layout_constraintTop_toBottomOf="@id/edtNombre"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="8dp" />
+        android:layout_marginTop="8dp"/>
 
     <EditText
         android:id="@+id/edtFecha"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Fecha (dd/mm/yyyy)"
-        android:inputType="date"
+        android:hint="Fecha (dd/MM/yyyy)"
         app:layout_constraintTop_toBottomOf="@id/edtCantidad"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="8dp" />
+        android:layout_marginTop="8dp"/>
 
     <EditText
         android:id="@+id/edtObservaciones"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="Observaciones"
-        android:inputType="textMultiLine"
         app:layout_constraintTop_toBottomOf="@id/edtFecha"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="8dp" />
+        android:layout_marginTop="8dp"/>
 
     <Button
         android:id="@+id/btnGuardar"
@@ -84,6 +116,5 @@
         app:layout_constraintTop_toBottomOf="@id/edtObservaciones"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp" />
-
+        android:layout_marginTop="16dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

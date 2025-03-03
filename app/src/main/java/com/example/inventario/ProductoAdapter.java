@@ -2,21 +2,26 @@ package com.example.inventario;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.File;
 import java.util.List;
 
 public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ProductoViewHolder> {
 
-    private List<Producto> productoList;
-    private Context context;
+    private final List<Producto> productoList;
+    private final Context context;
 
     public ProductoAdapter(List<Producto> productoList, Context context) {
         this.productoList = productoList;
@@ -38,26 +43,31 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.Produc
         holder.txtNombre.setText("Nombre: " + producto.getNombre());
         holder.txtCantidad.setText("Cantidad: " + producto.getCantidad());
 
+        // Cargar imagen desde archivo (BitmapFactory)
+        if (producto.getImagen() != null && !producto.getImagen().isEmpty()) {
+            File imgFile = new File(producto.getImagen());
+            if (imgFile.exists()) {
+                Bitmap bitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                holder.imgProducto.setImageBitmap(bitmap);
+            } else {
+                holder.imgProducto.setImageResource(R.drawable.ic_image_not_found);
+            }
+        } else {
+            holder.imgProducto.setImageResource(R.drawable.ic_image_not_found);
+        }
+
+        // Botón Editar
         holder.btnEditar.setOnClickListener(v -> {
             Intent intent = new Intent(context, EditarProductoActivity.class);
             intent.putExtra("codigo", producto.getCodigo());
-
-            // Aquí hacemos el casteo para que el contexto sea la actividad correcta
-            if (context instanceof ListaProductosActivity) {
-                ((ListaProductosActivity) context).startActivityForResult(intent, 1);
-            }
+            ((ListaProductosActivity) context).startActivityForResult(intent, 1);
         });
 
+        // Botón Eliminar
         holder.btnEliminar.setOnClickListener(v -> {
             eliminarProducto(producto.getCodigo(), position);
         });
     }
-
-    @Override
-    public int getItemCount() {
-        return productoList.size();
-    }
-
     private void eliminarProducto(String codigo, int position) {
         DatabaseHelper db = new DatabaseHelper(context);
         db.eliminarProducto(codigo);
@@ -65,8 +75,14 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.Produc
         notifyItemRemoved(position);
     }
 
+    @Override
+    public int getItemCount() {
+        return productoList.size();
+    }
+
     public static class ProductoViewHolder extends RecyclerView.ViewHolder {
         TextView txtCodigo, txtNombre, txtCantidad;
+        ImageView imgProducto;
         Button btnEditar, btnEliminar;
 
         public ProductoViewHolder(@NonNull View itemView) {
@@ -74,6 +90,7 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.Produc
             txtCodigo = itemView.findViewById(R.id.txtCodigo);
             txtNombre = itemView.findViewById(R.id.txtNombre);
             txtCantidad = itemView.findViewById(R.id.txtCantidad);
+            imgProducto = itemView.findViewById(R.id.imgProducto);
             btnEditar = itemView.findViewById(R.id.btnEditar);
             btnEliminar = itemView.findViewById(R.id.btnEliminar);
         }
