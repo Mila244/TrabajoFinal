@@ -70,16 +70,16 @@ public class RegistrarProductoActivity extends AppCompatActivity {
         try {
             int cantidad = Integer.parseInt(edtCantidad.getText().toString().trim());
 
-            Producto p = new Producto(
+            Producto producto = new Producto(
                     edtCodigo.getText().toString().trim(),
                     edtNombre.getText().toString().trim(),
                     cantidad,
                     edtFecha.getText().toString().trim(),
                     edtObservaciones.getText().toString().trim(),
-                    rutaFoto  // ✅ Ahora el producto incluye la foto
+                    rutaFoto
             );
 
-            if (db.insertarProducto(p, rutaFoto)) {
+            if (db.insertarProducto(producto)) {
                 Toast.makeText(this, "Producto guardado correctamente", Toast.LENGTH_SHORT).show();
                 finish();
             } else {
@@ -134,7 +134,7 @@ public class RegistrarProductoActivity extends AppCompatActivity {
                 edtCantidad.getText().toString().trim().isEmpty() ||
                 edtFecha.getText().toString().trim().isEmpty() ||
                 edtObservaciones.getText().toString().trim().isEmpty() ||
-                rutaFoto.trim().isEmpty();   // ✔️ Validar que se haya capturado o subido una imagen
+                rutaFoto.trim().isEmpty();
     }
 
     private String obtenerFechaActual() {
@@ -148,19 +148,30 @@ public class RegistrarProductoActivity extends AppCompatActivity {
         if (resultCode != RESULT_OK) return;
 
         if (requestCode == REQUEST_TOMAR_FOTO) {
-            Log.d("DEBUG_IMAGEN", "Foto tomada - ruta: " + rutaFoto);  // ✔️ Aquí
             mostrarImagenRedimensionada(rutaFoto);
         } else if (requestCode == REQUEST_SELECCIONAR_FOTO) {
             Uri imagenSeleccionada = data.getData();
             if (imagenSeleccionada != null) {
                 rutaFoto = PathUtil.getPath(this, imagenSeleccionada);
-                Log.d("DEBUG_IMAGEN", "Foto seleccionada - ruta: " + rutaFoto);  // ✔️ Aquí
                 mostrarImagenRedimensionada(rutaFoto);
             }
         }
     }
 
     private void mostrarImagenRedimensionada(String ruta) {
+        if (ruta == null || ruta.trim().isEmpty()) {
+            imgProducto.setImageResource(R.drawable.ic_image_not_found);
+            return;
+        }
+
+        File archivo = new File(ruta);
+        if (!archivo.exists()) {
+            imgProducto.setImageResource(R.drawable.ic_image_not_found);
+            Toast.makeText(this, "La imagen no existe: " + ruta, Toast.LENGTH_SHORT).show();
+            rutaFoto = "";  // Limpiamos la ruta
+            return;
+        }
+
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
         BitmapFactory.decodeFile(ruta, options);
@@ -180,18 +191,19 @@ public class RegistrarProductoActivity extends AppCompatActivity {
         options.inJustDecodeBounds = false;
 
         Bitmap imagenRedimensionada = BitmapFactory.decodeFile(ruta, options);
-        imgProducto.setImageBitmap(imagenRedimensionada);
+        if (imagenRedimensionada != null) {
+            imgProducto.setImageBitmap(imagenRedimensionada);
+        } else {
+            imgProducto.setImageResource(R.drawable.ic_image_not_found);
+            Toast.makeText(this, "No se pudo cargar la imagen", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == REQUEST_PERMISO_CAMARA) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                tomarFoto();
-            } else {
-                Toast.makeText(this, "Permiso de cámara denegado", Toast.LENGTH_SHORT).show();
-            }
+        if (requestCode == REQUEST_PERMISO_CAMARA && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            tomarFoto();
         }
     }
 }

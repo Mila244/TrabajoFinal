@@ -61,7 +61,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     // ✅ Método para obtener un producto por código
-    public boolean insertarProducto(Producto producto, String rutaImagen) {
+    public boolean insertarProducto(Producto producto) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues valores = new ContentValues();
         valores.put("codigo", producto.getCodigo());
@@ -69,7 +69,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         valores.put("cantidad", producto.getCantidad());
         valores.put("fecha", producto.getFecha());
         valores.put("observaciones", producto.getObservaciones());
-        valores.put("imagen", rutaImagen != null ? rutaImagen : "");  // Guarda la ruta de la imagen
+        valores.put("imagen", producto.getImagen());
 
         long resultado = db.insert("productos", null, valores);
         return resultado != -1;
@@ -115,4 +115,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return null;  // Producto no encontrado
         }
     }
+
+
+
 }
